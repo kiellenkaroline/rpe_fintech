@@ -1,4 +1,6 @@
 package rpe.challenge.fintech.dtos;
 
-public record PagamentoDTO(Long faturaId) {
+import org.antlr.v4.runtime.misc.NotNull;
+
+public record PagamentoDTO(@NotNull Long faturaId) {
 }

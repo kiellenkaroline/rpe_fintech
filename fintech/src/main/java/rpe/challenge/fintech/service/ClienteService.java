@@ -5,8 +5,6 @@ import org.springframework.stereotype.Service;
 import rpe.challenge.fintech.dtos.ClienteDTO;
 import rpe.challenge.fintech.model.Cliente;
 import rpe.challenge.fintech.repository.ClienteRepository;
-
-import javax.swing.text.html.parser.Entity;
 import java.util.List;
 
 @Service

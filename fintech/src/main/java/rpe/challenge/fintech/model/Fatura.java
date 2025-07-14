@@ -2,6 +2,7 @@ package rpe.challenge.fintech.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import rpe.challenge.fintech.enums.StatusFatura;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -26,5 +27,7 @@ public class Fatura {
 
     private BigDecimal valor;
 
-    private String status;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status")
+    private StatusFatura status;
 }
