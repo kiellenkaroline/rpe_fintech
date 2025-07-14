@@ -12,29 +12,29 @@ import java.util.List;
 @RestController
 @RequestMapping("/clientes")
 public class ClienteController {
-    private final ClienteService clienteService;
-    private ClienteService service;
 
-    public ClienteController(ClienteService service, ClienteService clienteService) {
-        this.service = service;
+    private final ClienteService clienteService;
+
+    public ClienteController(ClienteService clienteService) {
         this.clienteService = clienteService;
     }
 
+
     @GetMapping
     public List<Cliente> listar(){
-        return service.listar();
+        return clienteService.listar();
     }
 
     @PostMapping
     public ResponseEntity<Cliente>criar(@RequestBody ClienteDTO dto){
-        Cliente novo = service.criar(dto);
+        Cliente novo = clienteService.criar(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(novo);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Cliente> buscar(@PathVariable Long id){
 
-        return ResponseEntity.ok(service.buscar(id));
+        return ResponseEntity.ok(clienteService.buscar(id));
     }
 
     @PutMapping("/{id}")
@@ -42,7 +42,7 @@ public class ClienteController {
         return clienteService.atualizar(id, dto);
     }
 
-    @GetMapping("/clientes/bloqueados")
+    @GetMapping("/bloqueados")
     public List<Cliente> listarBloqueados(){
         return clienteService.listarBloqueados();
     }

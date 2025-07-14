@@ -10,8 +10,15 @@ import rpe.challenge.fintech.service.FaturaService;
 
 import java.util.List;
 
+@RestController
+@RequestMapping("/faturas")
 public class FaturaController {
-    private FaturaService service;
+
+    private final FaturaService service;
+
+    public FaturaController(FaturaService service) {
+        this.service = service;
+    }
 
     @GetMapping
     public List<Fatura>listar (){
@@ -24,6 +31,7 @@ public class FaturaController {
         return service.listarPorCliente(clienteId);
     }
 
+    @GetMapping("/atrasadas")
     public List<Fatura> listarAtrasadas(){
         return service.listarAtrasadas();
     }
@@ -33,12 +41,13 @@ public class FaturaController {
         return ResponseEntity.status(HttpStatus.CREATED).body(nova);
     }
 
-    @PutMapping
+    @PutMapping("/atualizar-status")
     public ResponseEntity<Void> atualizarStatus(){
         service.atualizarStatusFaturas();
         return ResponseEntity.noContent().build();
     }
 
+    @PutMapping("/{id}/pagamento")
     public ResponseEntity<Fatura> pagar(@RequestBody PagamentoDTO dto){
         Fatura paga = service.pagar(dto.faturaId());
         return ResponseEntity.ok(paga);
