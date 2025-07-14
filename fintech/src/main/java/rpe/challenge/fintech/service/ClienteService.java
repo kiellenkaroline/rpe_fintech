@@ -26,4 +26,18 @@ public class ClienteService {
         return clienteRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Cliente não encontrado com ID: " + id));
     }
+
+    public Cliente atualizar(Long id, ClienteDTO dto){
+        Cliente cliente = clienteRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Cliente não encontrado."));
+
+        cliente.setNome(dto.nome());
+        cliente.setCpf(dto.cpf());
+
+        return clienteRepository.save(cliente);
+    }
+
+    public List<Cliente> listarBloqueados() {
+        return clienteRepository.findByStatusBloqueio("B");
+    }
 }

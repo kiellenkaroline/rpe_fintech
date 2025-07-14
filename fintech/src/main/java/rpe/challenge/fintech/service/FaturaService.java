@@ -38,6 +38,14 @@ public class FaturaService {
     public List<Fatura> listar(){
         return faturaRepository.findAll();
     }
+    public List<Fatura> listarPorCliente(Long clienteId) {
+        Cliente cliente = clienteService.buscar(clienteId);
+        return cliente.getFaturas();
+    }
+
+    public List<Fatura> listarAtrasadas() {
+        return faturaRepository.findByStatus(StatusFatura.A);
+    }
 
     @Transactional
     public void atualizarStatusFaturas(){

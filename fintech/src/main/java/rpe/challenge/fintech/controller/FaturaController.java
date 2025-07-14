@@ -2,10 +2,7 @@ package rpe.challenge.fintech.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 import rpe.challenge.fintech.dtos.FaturaDTO;
 import rpe.challenge.fintech.dtos.PagamentoDTO;
 import rpe.challenge.fintech.model.Fatura;
@@ -18,9 +15,18 @@ public class FaturaController {
 
     @GetMapping
     public List<Fatura>listar (){
+
         return service.listar();
     }
 
+    @GetMapping("/cliente/{clienteId}")
+    public List<Fatura> listraPorCliente(@PathVariable Long clienteId){
+        return service.listarPorCliente(clienteId);
+    }
+
+    public List<Fatura> listarAtrasadas(){
+        return service.listarAtrasadas();
+    }
     @PostMapping
     public ResponseEntity<Fatura> criar(@RequestBody FaturaDTO dto){
         Fatura nova = service.criar(dto);

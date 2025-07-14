@@ -12,10 +12,12 @@ import java.util.List;
 @RestController
 @RequestMapping("/clientes")
 public class ClienteController {
+    private final ClienteService clienteService;
     private ClienteService service;
 
-    public ClienteController(ClienteService service) {
+    public ClienteController(ClienteService service, ClienteService clienteService) {
         this.service = service;
+        this.clienteService = clienteService;
     }
 
     @GetMapping
@@ -31,7 +33,18 @@ public class ClienteController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Cliente> buscar(@PathVariable Long id){
+
         return ResponseEntity.ok(service.buscar(id));
+    }
+
+    @PutMapping("/{id}")
+    public Cliente atualizar(@PathVariable Long id, @RequestBody ClienteDTO dto){
+        return clienteService.atualizar(id, dto);
+    }
+
+    @GetMapping("/clientes/bloqueados")
+    public List<Cliente> listarBloqueados(){
+        return clienteService.listarBloqueados();
     }
 
 }
