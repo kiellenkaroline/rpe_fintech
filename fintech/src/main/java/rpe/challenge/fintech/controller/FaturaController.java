@@ -10,6 +10,7 @@ import rpe.challenge.fintech.service.FaturaService;
 
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:5174")
 @RestController
 @RequestMapping("/faturas")
 public class FaturaController {

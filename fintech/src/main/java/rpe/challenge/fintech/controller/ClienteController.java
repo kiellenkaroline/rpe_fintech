@@ -9,6 +9,7 @@ import rpe.challenge.fintech.service.ClienteService;
 
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:5174")
 @RestController
 @RequestMapping("/clientes")
 public class ClienteController {

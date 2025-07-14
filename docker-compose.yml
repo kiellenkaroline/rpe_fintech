@@ -12,6 +12,17 @@ services:
     depends_on:
       db:
         condition: service_healthy
+
+  fintech-frontend:
+    container_name: fintech-frontend
+    image: fintech-frontend:latest
+    build:
+      context: ./fintech-app/fintech-frontend
+    ports:
+      - 3000:80
+    depends_on:
+      - fintech-backend
+
   db:
     image: mysql:8.0
     container_name: fintechdb
@@ -28,5 +39,6 @@ services:
       interval: 5s
       timeout: 5s
       retries: 20
+
 volumes:
   mysql-data:

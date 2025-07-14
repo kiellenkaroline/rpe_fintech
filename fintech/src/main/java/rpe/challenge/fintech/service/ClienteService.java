@@ -3,6 +3,7 @@ package rpe.challenge.fintech.service;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 import rpe.challenge.fintech.dtos.ClienteDTO;
+import rpe.challenge.fintech.enums.StatusBloqueio;
 import rpe.challenge.fintech.model.Cliente;
 import rpe.challenge.fintech.repository.ClienteRepository;
 import java.util.List;
@@ -38,6 +39,7 @@ public class ClienteService {
     }
 
     public List<Cliente> listarBloqueados() {
-        return clienteRepository.findByStatusBloqueio("B");
+        return clienteRepository.findByStatusBloqueio(StatusBloqueio.B);
+
     }
 }
