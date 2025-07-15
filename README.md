@@ -33,4 +33,13 @@ pagamentos, simulando parte do ecossistema real da empresa.
   service/ - Regras de negócio
   model/ - Entidades JPA
   repository/ / Acesso ao banco de dados
+
+  ## Como iniciar o projeto
+
+   - docker-compose build 
+   - docker-compose up
+   - acessar front-end em localhost:3000
+
+   ### testes back-end
+   ./gradlew test
     
