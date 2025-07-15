@@ -2,6 +2,7 @@ package rpe.challenge.fintech.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import rpe.challenge.fintech.dtos.ClienteDTO;
 import rpe.challenge.fintech.enums.StatusBloqueio;
 import rpe.challenge.fintech.model.Cliente;
 import rpe.challenge.fintech.repository.ClienteRepository;
@@ -14,6 +15,7 @@ import java.util.Optional;
 public class ClienteService {
 
     private final ClienteRepository clienteRepository;
+
 
     public List<Cliente> listarTodos() {
         return clienteRepository.findAll();

@@ -39,7 +39,7 @@ export default function Clientes() {
             } else {
                 await api.post('/clientes', clienteForm);
             }
-            setClienteForm({ nome: '', cpf: '' });
+            setClienteForm({ nome: '', cpf: '', dataNascimento:'', limiteCredito:'' });
             buscarClientes();
             buscarBloqueados();
         } catch (error) {
@@ -48,7 +48,7 @@ export default function Clientes() {
     };
 
     const editarCliente = (cliente) => {
-        setClienteForm({ nome: cliente.nome, cpf: cliente.cpf });
+        setClienteForm({ nome: cliente.nome, cpf: cliente.cpf, dataNascimento: cliente.dataNascimento, limiteCredito: cliente.limiteCredito });
         setEditandoId(cliente.id);
     };
 
@@ -72,6 +72,22 @@ export default function Clientes() {
                     onChange={(e) => setClienteForm({ ...clienteForm, cpf: e.target.value })}
                     style={inputStyle}
                 />
+
+                <input
+                    type='number'
+                    placeholder='Data de nascimento'
+                    value={clienteForm.dataNascimento}
+                    onChange={(e) => setClienteForm({ ...clienteForm, dataNascimento: e.target.value})}
+                    style={inputStyle}
+                />
+                <input
+                    type='number'
+                    placeholder='Limite de crédito'
+                    value={clienteForm.limiteCredito}
+                    onChange={(e) => setClienteForm({ ...clienteForm, limiteCredito: e.target.value})}
+                    style={inputStyle}
+                />
+                
                 <button onClick={salvarCliente} style={buttonStyle}>
                     {editandoId ? 'Atualizar Cliente' : 'Adicionar Cliente'}
                 </button>
