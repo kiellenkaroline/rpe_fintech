@@ -1,45 +1,43 @@
 package rpe.challenge.fintech.service;
 
-import jakarta.persistence.EntityNotFoundException;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import rpe.challenge.fintech.dtos.ClienteDTO;
 import rpe.challenge.fintech.enums.StatusBloqueio;
 import rpe.challenge.fintech.model.Cliente;
 import rpe.challenge.fintech.repository.ClienteRepository;
+
 import java.util.List;
+import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class ClienteService {
-    private ClienteRepository clienteRepository;
 
-    public Cliente criar(ClienteDTO dto){
-        Cliente cliente = new Cliente();
-        cliente.setNome(dto.nome());
-        cliente.setCpf(dto.cpf());
-        return clienteRepository.save(cliente);
-    }
+    private final ClienteRepository clienteRepository;
 
-    public List<Cliente> listar(){
+    public List<Cliente> listarTodos() {
         return clienteRepository.findAll();
     }
 
-    public Cliente buscar(Long id){
-        return clienteRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Cliente não encontrado com ID: " + id));
+    public Cliente salvar(Cliente cliente) {
+        cliente.setStatusBloqueio(StatusBloqueio.B); // padrão
+        return clienteRepository.save(cliente);
     }
 
-    public Cliente atualizar(Long id, ClienteDTO dto){
-        Cliente cliente = clienteRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Cliente não encontrado."));
+    public Optional<Cliente> buscarPorId(Long id) {
+        return clienteRepository.findById(id);
+    }
 
-        cliente.setNome(dto.nome());
-        cliente.setCpf(dto.cpf());
-
+    public Cliente atualizar(Long id, Cliente clienteAtualizado) {
+        Cliente cliente = clienteRepository.findById(id).orElseThrow();
+        cliente.setNome(clienteAtualizado.getNome());
+        cliente.setCpf(clienteAtualizado.getCpf());
+        cliente.setDataNascimento(clienteAtualizado.getDataNascimento());
+        cliente.setLimiteCredito(clienteAtualizado.getLimiteCredito());
         return clienteRepository.save(cliente);
     }
 
     public List<Cliente> listarBloqueados() {
         return clienteRepository.findByStatusBloqueio(StatusBloqueio.B);
-
     }
 }

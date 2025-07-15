@@ -10,17 +10,14 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
-@Entity(name = "cliente")
+@Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class Cliente {
 
-    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Fatura> faturas;
-
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String nome;
@@ -29,10 +26,13 @@ public class Cliente {
 
     private LocalDate dataNascimento;
 
-    @Column(name = "status_bloqueio")
     @Enumerated(EnumType.STRING)
+    @Column(name = "status_bloqueio")
     private StatusBloqueio statusBloqueio;
 
     @Column(name = "limite_credito")
     private BigDecimal limiteCredito;
+
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Fatura> faturas;
 }

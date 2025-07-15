@@ -1,51 +1,38 @@
 package rpe.challenge.fintech.controller;
 
-import org.springframework.http.HttpStatus;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import rpe.challenge.fintech.dtos.ClienteDTO;
 import rpe.challenge.fintech.model.Cliente;
 import rpe.challenge.fintech.service.ClienteService;
 
 import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:5174")
 @RestController
 @RequestMapping("/clientes")
+@RequiredArgsConstructor
+@CrossOrigin(origins = "*")
 public class ClienteController {
 
     private final ClienteService clienteService;
 
-    public ClienteController(ClienteService clienteService) {
-        this.clienteService = clienteService;
-    }
-
-
     @GetMapping
-    public List<Cliente> listar(){
-        return clienteService.listar();
+    public ResponseEntity<List<Cliente>> listarTodos() {
+        return ResponseEntity.ok(clienteService.listarTodos());
     }
 
     @PostMapping
-    public ResponseEntity<Cliente>criar(@RequestBody ClienteDTO dto){
-        Cliente novo = clienteService.criar(dto);
-        return ResponseEntity.status(HttpStatus.CREATED).body(novo);
-    }
-
-    @GetMapping("/{id}")
-    public ResponseEntity<Cliente> buscar(@PathVariable Long id){
-
-        return ResponseEntity.ok(clienteService.buscar(id));
+    public ResponseEntity<Cliente> salvar(@RequestBody Cliente cliente) {
+        return ResponseEntity.ok(clienteService.salvar(cliente));
     }
 
     @PutMapping("/{id}")
-    public Cliente atualizar(@PathVariable Long id, @RequestBody ClienteDTO dto){
-        return clienteService.atualizar(id, dto);
+    public ResponseEntity<Cliente> atualizar(@PathVariable Long id, @RequestBody Cliente cliente) {
+        return ResponseEntity.ok(clienteService.atualizar(id, cliente));
     }
 
     @GetMapping("/bloqueados")
-    public List<Cliente> listarBloqueados(){
-        return clienteService.listarBloqueados();
+    public ResponseEntity<List<Cliente>> listarBloqueados() {
+        return ResponseEntity.ok(clienteService.listarBloqueados());
     }
-
 }
