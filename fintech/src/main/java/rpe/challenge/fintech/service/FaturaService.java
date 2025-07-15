@@ -38,4 +38,3 @@ public class FaturaService {
         faturaRepository.save(fatura);
     }
 }
-
