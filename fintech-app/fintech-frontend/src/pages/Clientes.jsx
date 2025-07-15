@@ -4,7 +4,7 @@ import api from '../api/api';
 export default function Clientes() {
     const [clientes, setClientes] = useState([]);
     const [bloqueados, setBloqueados] = useState([]);
-    const [clienteForm, setClienteForm] = useState({ nome: '', cpf: '' });
+    const [clienteForm, setClienteForm] = useState({ nome: '', cpf: '', dataNascimento:'', limiteCredito:'' });
     const [editandoId, setEditandoId] = useState(null);
 
     useEffect(() => {
@@ -74,7 +74,7 @@ export default function Clientes() {
                 />
 
                 <input
-                    type='number'
+                    type='date'
                     placeholder='Data de nascimento'
                     value={clienteForm.dataNascimento}
                     onChange={(e) => setClienteForm({ ...clienteForm, dataNascimento: e.target.value})}
