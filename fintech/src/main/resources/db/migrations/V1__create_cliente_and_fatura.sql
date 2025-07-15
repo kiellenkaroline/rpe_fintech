@@ -1,5 +1,5 @@
 CREATE TABLE cliente (
-                         id BIGINT PRIMARY KEY,
+                         id BIGINT PRIMARY KEY NOT NULL AUTO_INCREMENT,
                          nome VARCHAR(255) NOT NULL,
                          cpf VARCHAR(14) UNIQUE NOT NULL,
                          data_nascimento DATE NOT NULL,
@@ -8,7 +8,7 @@ CREATE TABLE cliente (
 );
 
 CREATE TABLE fatura (
-                        id BIGINT PRIMARY KEY,
+                        id BIGINT PRIMARY KEY NOT NULL AUTO_INCREMENT,
                         cliente_id BIGINT NOT NULL,
                         data_vencimento DATE NOT NULL,
                         data_pagamento DATE,

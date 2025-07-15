@@ -23,7 +23,7 @@ public class FaturaService {
     }
 
     public List<Fatura> listarAtrasadas() {
-        return faturaRepository.findByStatus("A");
+        return faturaRepository.findByStatus(StatusFatura.A);
     }
 
     public void pagar(Long id) {
@@ -38,3 +38,4 @@ public class FaturaService {
         faturaRepository.save(fatura);
     }
 }
+

@@ -12,10 +12,12 @@ export default function Faturas() {
 
     const carregarFaturas = async () => {
         try {
-            const todas = await api.get('/api/faturas');
-            const atrasadas = await api.get('/api/faturas/atrasadas');
+            const todas = await api.get('/faturas');
+            const atrasadas = await api.get('/faturas/atrasadas');
             setFaturas(todas.data);
+            console.log('Todas as faturas:', todas.data);
             setAtrasadas(atrasadas.data);
+            console.log('Faturas atrasadas:', atrasadas.data);
         } catch (error) {
             console.error('Erro ao carregar faturas:', error);
         }
@@ -25,7 +27,7 @@ export default function Faturas() {
         if (!idPagamento) return alert('Informe o ID da fatura.');
 
         try {
-            await api.put(`/api/faturas/${idPagamento}/pagamento`);
+            await api.put(`/faturas/${idPagamento}/pagamento`);
             alert(`Fatura ${idPagamento} paga com sucesso!`);
             setIdPagamento('');
             carregarFaturas();

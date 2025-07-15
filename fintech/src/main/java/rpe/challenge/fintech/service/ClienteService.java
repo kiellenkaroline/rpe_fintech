@@ -20,7 +20,7 @@ public class ClienteService {
     }
 
     public Cliente salvar(Cliente cliente) {
-        cliente.setStatusBloqueio(StatusBloqueio.B); // padrão
+        cliente.setStatusBloqueio(StatusBloqueio.B);
         return clienteRepository.save(cliente);
     }
 

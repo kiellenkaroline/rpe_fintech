@@ -14,7 +14,8 @@ export default function Clientes() {
 
     const buscarClientes = async () => {
         try {
-            const res = await api.get('/api/clientes');
+            const res = await api.get('/clientes');
+            console.log('Clientes:', res.data);
             setClientes(res.data);
         } catch (error) {
             console.error('Erro ao buscar clientes:', error);
@@ -23,7 +24,7 @@ export default function Clientes() {
 
     const buscarBloqueados = async () => {
         try {
-            const res = await api.get('/api/clientes/bloqueados');
+            const res = await api.get('/clientes/bloqueados');
             setBloqueados(res.data);
         } catch (error) {
             console.error('Erro ao buscar clientes bloqueados:', error);
@@ -33,10 +34,10 @@ export default function Clientes() {
     const salvarCliente = async () => {
         try {
             if (editandoId) {
-                await api.put(`/api/clientes/${editandoId}`, clienteForm);
+                await api.put(`/clientes/${editandoId}`, clienteForm);
                 setEditandoId(null);
             } else {
-                await api.post('/api/clientes', clienteForm);
+                await api.post('/clientes', clienteForm);
             }
             setClienteForm({ nome: '', cpf: '' });
             buscarClientes();
