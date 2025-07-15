@@ -30,6 +30,7 @@ dependencies {
     implementation 'org.flywaydb:flyway-core'
     implementation 'org.hibernate.validator:hibernate-validator:8.0.0.Final'
     implementation 'org.flywaydb:flyway-mysql'
+    testImplementation("org.mockito:mockito-core:5.18.0")
     compileOnly 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     runtimeOnly 'com.mysql:mysql-connector-j'
