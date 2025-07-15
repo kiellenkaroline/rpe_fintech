@@ -2,11 +2,10 @@ spring:
   application:
     name: fintech
 
-
   datasource:
-    url: jdbc:mysql://localhost:3306/db?createDatabaseIfNotExist=true
-    username: root
-    password: password
+    url: jdbc:mysql://${DATABASE_HOST}:${DATABASE_PORT}/${DATABASE_NAME}?createDatabaseIfNotExist=true
+    username: ${DATABASE_USER}
+    password: ${DATABASE_PASS}
     driverClassName: com.mysql.cj.jdbc.Driver
 
   jpa:
